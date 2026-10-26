@@ -53,11 +53,13 @@ public final class Js {
     return value instanceof Boolean;
   }
 
+  /** A value as the array it is known to be. */
   @SuppressWarnings("unchecked")
   public static List<Object> asArray (Object value) {
     return (List<Object>) value;
   }
 
+  /** A value as the object it is known to be. */
   @SuppressWarnings("unchecked")
   public static Map<String, Object> asObject (Object value) {
     return (Map<String, Object>) value;

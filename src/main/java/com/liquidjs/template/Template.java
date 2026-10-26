@@ -18,6 +18,7 @@ import java.util.List;
  * analysis returns null from them, which is how the analyser tells that it does not implement them.
  */
 public interface Template {
+  /** The token this node was built from. */
   Token getToken();
 
   /** Render this node, either into the emitter or as the value it returns. */

@@ -30,6 +30,7 @@ public final class OperatorTrie {
 
   private static final Map<Object, Node<?>> CACHE = new WeakHashMap<>();
 
+  /** The trie over a mapping of names, built once per mapping and reused. */
   @SuppressWarnings("unchecked")
   public static <T> Node<T> create (Map<String, T> input) {
     synchronized (CACHE) {

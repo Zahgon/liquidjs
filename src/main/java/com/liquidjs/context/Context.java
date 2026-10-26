@@ -86,11 +86,13 @@ public class Context {
     return System.currentTimeMillis();
   }
 
+  /** Read a register, the state a tag keeps for the whole render. */
   @SuppressWarnings("unchecked")
   public <T> T getRegister (String key) {
     return (T) registers.get(key);
   }
 
+  /** Read a register, setting it to a default when it has no value yet. */
   @SuppressWarnings("unchecked")
   public <T> T getRegister (String key, T defaultValue) {
     Object value = registers.get(key);
@@ -183,6 +185,7 @@ public class Context {
     return scopes.isEmpty() ? null : scopes.remove(scopes.size() - 1);
   }
 
+  /** The context level scope that assign and capture write into. */
   @SuppressWarnings("unchecked")
   public Map<String, Object> bottom () {
     return (Map<String, Object>) scopes.get(0);

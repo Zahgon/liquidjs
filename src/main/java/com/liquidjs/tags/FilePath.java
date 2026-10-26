@@ -58,6 +58,7 @@ public final class FilePath {
     return templates;
   }
 
+  /** The file name a tag was given, rendered when it is a template of its own. */
   @SuppressWarnings("unchecked")
   public static Object renderFilePath (Object file, Context ctx, Liquid liquid) {
     if (Js.isString(file)) return file;
