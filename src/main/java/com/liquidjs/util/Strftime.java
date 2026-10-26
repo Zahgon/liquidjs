@@ -90,10 +90,12 @@ public final class Strftime {
         + JsString.padStart(String.valueOf(minutes), 2, "0");
   }
 
+  /** Format a date, charging nothing against a memory limit. */
   public static String strftime (LiquidDate date, String formatStr) {
     return strftime(date, formatStr, null);
   }
 
+  /** Format a date, charging the padding it adds against a memory limit. */
   public static String strftime (LiquidDate date, String formatStr, Limiter memoryLimit) {
     StringBuilder output = new StringBuilder();
     String remaining = formatStr;

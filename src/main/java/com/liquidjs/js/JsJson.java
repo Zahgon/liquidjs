@@ -17,6 +17,7 @@ public final class JsJson {
 
   /** The replacer a caller passes to serialisation: it sees every value, in document order. */
   public interface Visitor {
+    /** See one value, and return what is serialised in its place. */
     Object visit (Object holder, String key, Object value);
   }
 

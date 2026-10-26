@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 public class ParseStream {
   /** What a stream does with one token or one template. */
   public interface Handler {
+    /** Handle the token or the template the event carries. */
     void accept (Object arg);
   }
 

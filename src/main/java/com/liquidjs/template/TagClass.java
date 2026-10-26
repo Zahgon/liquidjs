@@ -14,5 +14,6 @@ import java.util.List;
 
 /** How a tag is built from its token and from the tokens that follow it. */
 public interface TagClass {
+  /** Build the tag from its token, consuming the tokens that belong to it. */
   Tag create (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser);
 }

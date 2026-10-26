@@ -19,11 +19,13 @@ public final class Operators {
 
   /** An operator over a left and a right operand. */
   public interface Binary {
+    /** Apply the operator to both operands. */
     boolean apply (Object lhs, Object rhs, Context ctx);
   }
 
   /** An operator over one operand. */
   public interface Unary {
+    /** Apply the operator to its one operand. */
     boolean apply (Object operand, Context ctx);
   }
 
