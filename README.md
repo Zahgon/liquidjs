@@ -31,6 +31,35 @@ const html = await engine.parseAndRender(
 
 ## Installation
 
+LiquidJS is a Java library built with Maven. Add it to your build:
+
+```xml
+<dependency>
+  <groupId>com.liquidjs</groupId>
+  <artifactId>liquidjs</artifactId>
+  <version>10.30.0</version>
+</dependency>
+```
+
+Render a template:
+
+```java
+import com.liquidjs.Liquid;
+
+Liquid engine = new Liquid();
+String html = (String) engine.parseAndRenderSync("{{ name | capitalize }}",
+    java.util.Map.of("name", "alice"));
+```
+
+Build the engine and run its tests from a clone with `mvn -B -Dmaven.test.skip=true package` and
+`mvn -B test`. The command line entry point is `com.liquidjs.cli.Main`:
+
+```bash
+java -cp target/classes com.liquidjs.cli.Main --template '{{ "hello" | capitalize }}'
+```
+
+## Installation (previous releases)
+
 **Node.js**
 
 ```bash

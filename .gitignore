@@ -7,6 +7,9 @@ npm-debug.log*
 coverage/
 .nyc_output/
 
+# build output
+target/
+
 # modules
 node_modules/
 
