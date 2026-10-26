@@ -25,7 +25,7 @@ public final class Base64Filters {
     filters.put("base64_encode", (FilterHandler) (impl, value, args) -> {
       String str = Underscore.stringify(value);
       impl.context.memoryLimit.use(str.length());
-      return Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));
+      return Base64.getEncoder().encodeToString(com.liquidjs.js.JsString.utf8Bytes(str));
     });
     filters.put("base64_decode", (FilterHandler) (impl, value, args) -> {
       String str = Underscore.stringify(value);

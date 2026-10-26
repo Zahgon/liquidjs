@@ -150,6 +150,26 @@ public final class JsString {
     return out.substring(0, n);
   }
 
+  /**
+   * The UTF-8 bytes of a string, with an unpaired surrogate written as the replacement character,
+   * as the source runtime's byte buffers write it.
+   */
+  public static byte[] utf8Bytes (String str) {
+    StringBuilder out = new StringBuilder();
+    for (int i = 0; i < str.length(); i++) {
+      char ch = str.charAt(i);
+      if (Character.isHighSurrogate(ch) && i + 1 < str.length()
+          && Character.isLowSurrogate(str.charAt(i + 1))) {
+        out.append(ch).append(str.charAt(++i));
+      } else if (Character.isSurrogate(ch)) {
+        out.append('\ufffd');
+      } else {
+        out.append(ch);
+      }
+    }
+    return out.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+  }
+
   /** The code point at an index, or -1 past the end. */
   public static int codePointAt (String str, int index) {
     if (index < 0 || index >= str.length()) return -1;

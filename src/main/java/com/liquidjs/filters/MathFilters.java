@@ -19,10 +19,12 @@ public final class MathFilters {
   /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("abs", (FilterHandler) (impl, v, args) -> Math.abs(Underscore.toNumber(v)));
-    filters.put("at_least", (FilterHandler) (impl, v, args) ->
-        maximum(Underscore.toNumber(v), Args.numberOrNaN(args, 0)));
-    filters.put("at_most", (FilterHandler) (impl, v, args) ->
-        minimum(Underscore.toNumber(v), Args.numberOrNaN(args, 0)));
+    filters.put("at_least", (FilterHandler) (impl, v, args) -> args.isEmpty()
+        ? Underscore.toNumber(v)
+        : maximum(Underscore.toNumber(v), Args.number(args, 0)));
+    filters.put("at_most", (FilterHandler) (impl, v, args) -> args.isEmpty()
+        ? Underscore.toNumber(v)
+        : minimum(Underscore.toNumber(v), Args.number(args, 0)));
     filters.put("ceil", (FilterHandler) (impl, v, args) -> Math.ceil(Underscore.toNumber(v)));
     filters.put("floor", (FilterHandler) (impl, v, args) -> Math.floor(Underscore.toNumber(v)));
     filters.put("divided_by", (FilterHandler) (impl, v, args) -> {

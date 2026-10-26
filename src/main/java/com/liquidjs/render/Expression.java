@@ -145,7 +145,7 @@ public class Expression {
     double low = Js.toNumberValue(evalTokenValue(token.lhs, ctx));
     double high = Js.toNumberValue(evalTokenValue(token.rhs, ctx));
     ctx.memoryLimit.use(high - low + 1);
-    return Underscore.range((int) low, (int) high + 1);
+    return Underscore.range(low, high + 1);
   }
 
   private static List<Token> toPostfix (List<Token> tokens) {

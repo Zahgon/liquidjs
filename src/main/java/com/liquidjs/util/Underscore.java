@@ -79,14 +79,17 @@ public final class Underscore {
   }
 
   /** The numbers from one bound up to another, the upper one excluded. */
-  public static List<Object> range (int start, int stop) {
+  public static List<Object> range (double start, double stop) {
     return range(start, stop, 1);
   }
 
-  /** The numbers from one bound up to another, in steps. */
-  public static List<Object> range (int start, int stop, int step) {
+  /**
+   * The numbers from one bound up to another, in steps. A bound that is not a number leaves the
+   * list empty, because the loop that fills it never starts.
+   */
+  public static List<Object> range (double start, double stop, double step) {
     List<Object> out = new ArrayList<>();
-    for (int i = start; i < stop; i += step) out.add((double) i);
+    for (double i = start; i < stop; i += step) out.add(i);
     return out;
   }
 

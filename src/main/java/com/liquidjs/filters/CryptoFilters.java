@@ -41,7 +41,7 @@ public final class CryptoFilters {
   static String sha256 (String str) {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
-      return hex(digest.digest(str.getBytes(StandardCharsets.UTF_8)));
+      return hex(digest.digest(com.liquidjs.js.JsString.utf8Bytes(str)));
     } catch (NoSuchAlgorithmException err) {
       throw new IllegalStateException(err);
     }
@@ -50,9 +50,9 @@ public final class CryptoFilters {
   static String hmacSha256 (String str, String key) {
     try {
       Mac mac = Mac.getInstance("HmacSHA256");
-      byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
+      byte[] keyBytes = com.liquidjs.js.JsString.utf8Bytes(key);
       mac.init(new SecretKeySpec(keyBytes.length == 0 ? new byte[1] : keyBytes, "HmacSHA256"));
-      return hex(mac.doFinal(str.getBytes(StandardCharsets.UTF_8)));
+      return hex(mac.doFinal(com.liquidjs.js.JsString.utf8Bytes(str)));
     } catch (java.security.GeneralSecurityException err) {
       throw new IllegalStateException(err);
     }
