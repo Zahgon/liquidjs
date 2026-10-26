@@ -44,6 +44,7 @@ public class EmptyDrop extends Drop implements Comparable {
     return "";
   }
 
+  /** Whether a value is one of this engine's errors. */
   public static boolean is (Object value) {
     return value instanceof EmptyDrop;
   }

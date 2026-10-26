@@ -15,16 +15,22 @@ public class RenderOptions {
   public boolean sync = false;
   /** The scope this call adds, as the globals option does for every call. */
   public Map<String, Object> globals = null;
+  /** Raise on an undefined variable for this call only; null leaves the option alone. */
   public Boolean strictVariables = null;
+  /** Read only own properties for this call only; null leaves the option alone. */
   public Boolean ownPropertyOnly = null;
   /** Limit how many tags, outputs and HTML nodes one render call may write. */
   public Double templateLimit = null;
+  /** The time this call may take, in milliseconds; null leaves the option alone. */
   public Double renderLimit = null;
+  /** How much data this call may create; null leaves the option alone. */
   public Double memoryLimit = null;
 
+  /** Options that change nothing, which is what a plain render call uses. */
   public RenderOptions () {
   }
 
+  /** Options that only say whether the call is synchronous. */
   public static RenderOptions sync (boolean sync) {
     RenderOptions options = new RenderOptions();
     options.sync = sync;

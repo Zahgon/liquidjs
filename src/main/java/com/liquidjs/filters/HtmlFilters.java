@@ -39,6 +39,7 @@ public final class HtmlFilters {
     return map;
   }
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("escape", (FilterHandler) (impl, v, args) -> escape(impl, v));
     filters.put("xml_escape", (FilterHandler) (impl, v, args) -> escape(impl, v));

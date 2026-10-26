@@ -38,6 +38,7 @@ public abstract class LiquidError extends RuntimeException {
     this.token = token;
   }
 
+  /** The token the error was raised at. */
   public Token getToken () {
     return token;
   }
@@ -57,6 +58,7 @@ public abstract class LiquidError extends RuntimeException {
     this.message = makeMessage(this.message, token);
   }
 
+  /** Whether a value is one of this engine's errors. */
   public static boolean is (Object value) {
     return value instanceof LiquidError;
   }

@@ -21,11 +21,13 @@ import com.liquidjs.js.JsString;
 
 /** A comment written on one line, or on several lines that each start with a hash. */
 public class InlineCommentTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = InlineCommentTag::new;
 
   private static final Pattern NOT_A_COMMENT_LINE = Pattern.compile(
       "\n[" + JsString.WHITESPACE_CLASS + "]*[^#" + JsString.WHITESPACE_CLASS + "]");
 
+  /** The inline comment tag, read from its token and the tokens that follow it. */
   public InlineCommentTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid,
                            Parser parser) {
     super(tagToken, remainTokens, liquid);

@@ -21,11 +21,13 @@ import java.io.Reader;
  * render for a short one.
  */
 public class StreamedEmitter implements Emitter {
+  /** The output written so far. */
   public String buffer = "";
   private final PipedWriter writer = new PipedWriter();
   private final Reader reader;
   private volatile Throwable failure;
 
+  /** An emitter whose output is readable from its stream as it is written. */
   public StreamedEmitter () {
     try {
       PipedReader pipe = new PipedReader(writer, 1 << 16);

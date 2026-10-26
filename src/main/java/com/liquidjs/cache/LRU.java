@@ -30,13 +30,17 @@ public class LRU implements LiquidCache {
   private final Map<String, Node> cache = new HashMap<>();
   private final Node head = new Node("HEAD", null, null, null);
   private final Node tail = new Node("TAIL", null, null, null);
+  /** How many templates the cache holds before it drops one. */
   public final int limit;
+  /** How many templates the cache holds now. */
   public int size;
 
+  /** An empty cache of a given size. */
   public LRU (int limit) {
     this(limit, 0);
   }
 
+  /** A cache of a given size that already counts some entries. */
   public LRU (int limit, int size) {
     this.limit = limit;
     this.size = size;
@@ -79,6 +83,7 @@ public class LRU implements LiquidCache {
     size--;
   }
 
+  /** Forget every template the cache holds. */
   public void clear () {
     head.next = tail;
     tail.prev = head;

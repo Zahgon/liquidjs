@@ -11,6 +11,7 @@ import com.liquidjs.tokens.Token;
 public class UndefinedVariableError extends LiquidError {
   private static final long serialVersionUID = 1L;
 
+  /** A variable that was read and not found, with the token that read it. */
   public UndefinedVariableError (Throwable error, Token token) {
     super(error, token);
     this.name = "UndefinedVariableError";

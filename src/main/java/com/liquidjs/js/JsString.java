@@ -21,6 +21,7 @@ public final class JsString {
   /** A whitespace run, equivalent to the source language's \s+ */
   public static final String WHITESPACE_RUN = "[" + WHITESPACE_CLASS + "]+";
 
+  /** Whether a code unit is whitespace or a line terminator of the source language. */
   public static boolean isWhitespace (char ch) {
     switch (ch) {
       case '\t': case '\n': case '\u000b': case '\f': case '\r': case ' ':
@@ -32,16 +33,19 @@ public final class JsString {
     }
   }
 
+  /** The string without its leading and trailing whitespace. */
   public static String trim (String str) {
     return trimEnd(trimStart(str));
   }
 
+  /** The string without its leading whitespace. */
   public static String trimStart (String str) {
     int start = 0;
     while (start < str.length() && isWhitespace(str.charAt(start))) start++;
     return str.substring(start);
   }
 
+  /** The string without its trailing whitespace. */
   public static String trimEnd (String str) {
     int end = str.length();
     while (end > 0 && isWhitespace(str.charAt(end - 1))) end--;
@@ -126,12 +130,14 @@ public final class JsString {
     return str.substring(from, to);
   }
 
+  /** The string padded on the left to a length. */
   public static String padStart (String str, int length, String pad) {
     int n = length - str.length();
     if (n <= 0 || pad.isEmpty()) return str;
     return repeatTo(pad, n) + str;
   }
 
+  /** The string padded on the right to a length. */
   public static String padEnd (String str, int length, String pad) {
     int n = length - str.length();
     if (n <= 0 || pad.isEmpty()) return str;

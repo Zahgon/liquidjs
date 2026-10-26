@@ -16,6 +16,7 @@ import java.util.Map;
 public final class MathFilters {
   private MathFilters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("abs", (FilterHandler) (impl, v, args) -> Math.abs(Underscore.toNumber(v)));
     filters.put("at_least", (FilterHandler) (impl, v, args) ->

@@ -20,6 +20,7 @@ import java.util.Map;
 public final class Base64Filters {
   private Base64Filters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("base64_encode", (FilterHandler) (impl, value, args) -> {
       String str = Underscore.stringify(value);

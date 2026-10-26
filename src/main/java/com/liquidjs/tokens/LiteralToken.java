@@ -10,9 +10,12 @@ import com.liquidjs.util.Literals;
 
 /** One of the named literals: true, false, nil, null, empty or blank. */
 public class LiteralToken extends Token implements ValueToken {
+  /** The value the literal stands for. */
   public final Object content;
+  /** The literal as it was written. */
   public final String literal;
 
+  /** One of the named literals: true, false, nil, null, empty or blank. */
   public LiteralToken (String input, int begin, int end, String file) {
     super(TokenKind.Literal, input, begin, end, file);
     this.literal = getText();

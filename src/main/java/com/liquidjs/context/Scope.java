@@ -13,10 +13,12 @@ import java.util.Map;
 public final class Scope {
   private Scope () {}
 
+  /** An empty scope. */
   public static Map<String, Object> createScope () {
     return Js.newObject();
   }
 
+  /** A scope holding a copy of a mapping. */
   public static Map<String, Object> createScope (Map<String, Object> from) {
     Map<String, Object> scope = Js.newObject();
     if (from != null) scope.putAll(from);

@@ -18,6 +18,7 @@ public final class Literals {
 
   private static final NullDrop NIL = new NullDrop();
 
+  /** The named literals, and the value each one stands for. */
   public static final Map<String, Object> VALUES = literalValues();
 
   private static Map<String, Object> literalValues () {

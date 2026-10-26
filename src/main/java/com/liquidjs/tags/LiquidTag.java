@@ -21,10 +21,12 @@ import java.util.List;
 
 /** Several tags written on their own lines, without delimiters of their own. */
 public class LiquidTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = LiquidTag::new;
 
   private final List<Template> templates;
 
+  /** The liquid tag, read from its token and the tokens that follow it. */
   public LiquidTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     List<LiquidTagToken> read = this.tokenizer.readLiquidTagTokens(this.liquid.options);

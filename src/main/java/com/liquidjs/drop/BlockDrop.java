@@ -15,10 +15,12 @@ import java.util.function.Consumer;
 public class BlockDrop extends Drop {
   private final Consumer<Emitter> superBlockRender;
 
+  /** A block with no parent block to reach. */
   public BlockDrop () {
     this(emitter -> { });
   }
 
+  /** A block whose parent block renders into the emitter it is given. */
   public BlockDrop (Consumer<Emitter> superBlockRender) {
     this.superBlockRender = superBlockRender;
   }

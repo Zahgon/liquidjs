@@ -9,6 +9,7 @@ import com.liquidjs.util.Underscore;
 
 /** Collects the output as one string. */
 public class SimpleEmitter implements Emitter {
+  /** The output written so far. */
   public String buffer = "";
 
   @Override

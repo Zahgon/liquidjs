@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class Variable {
   /** The property names and array indexes that make up the path to this variable. */
   public final List<Object> segments;
+  /** Where in the template the variable was read. */
   public final VariableLocation location;
 
   /** A variable read at one place in a template. */

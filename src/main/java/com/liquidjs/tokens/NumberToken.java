@@ -10,8 +10,10 @@ import com.liquidjs.parser.TokenKind;
 
 /** A number literal. */
 public class NumberToken extends Token implements ValueToken {
+  /** The number the token stands for. */
   public final Double content;
 
+  /** A number literal. */
   public NumberToken (String input, int begin, int end, String file) {
     super(TokenKind.Number, input, begin, end, file);
     this.content = JsNumber.parse(getText());

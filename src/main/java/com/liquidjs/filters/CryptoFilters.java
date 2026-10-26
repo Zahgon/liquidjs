@@ -23,6 +23,7 @@ import java.util.Map;
 public final class CryptoFilters {
   private CryptoFilters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("sha256", (FilterHandler) (impl, value, args) -> {
       String str = Underscore.stringify(value);

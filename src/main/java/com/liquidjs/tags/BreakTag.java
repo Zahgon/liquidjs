@@ -18,8 +18,10 @@ import java.util.List;
 
 /** Leaves the loop it is written in. */
 public class BreakTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = BreakTag::new;
 
+  /** The break tag, read from its token and the tokens that follow it. */
   public BreakTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
   }

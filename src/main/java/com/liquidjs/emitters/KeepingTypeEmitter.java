@@ -13,6 +13,7 @@ import com.liquidjs.util.Underscore;
  * {{ my-host }}:{{ my-port }} becomes a string.
  */
 public class KeepingTypeEmitter implements Emitter {
+  /** The output written so far, which keeps its type while it is one value. */
   public Object buffer = "";
 
   @Override

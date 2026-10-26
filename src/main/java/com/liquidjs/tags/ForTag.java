@@ -32,6 +32,7 @@ import java.util.Map;
 
 /** Renders its body once for every element of a collection. */
 public class ForTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = ForTag::new;
 
   private static final List<String> MODIFIERS = Arrays.asList("offset", "limit", "reversed");
@@ -42,6 +43,7 @@ public class ForTag extends Tag {
   private final List<Template> templates = new ArrayList<>();
   private final List<Template> elseTemplates = new ArrayList<>();
 
+  /** The for tag, read from its token and the tokens that follow it. */
   public ForTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     IdentifierToken variable = this.tokenizer.readIdentifier();

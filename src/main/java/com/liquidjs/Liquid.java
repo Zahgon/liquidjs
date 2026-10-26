@@ -32,14 +32,18 @@ import java.util.function.BiConsumer;
 
 /** The template engine: it parses templates, renders them and reports what they read. */
 public class Liquid {
+  /** The options this engine was built with, already normalised. */
   public final LiquidOptions options;
+  /** The renderer every template of this engine goes through. */
   public final Render renderer = new Render();
   /**
    * @deprecated will be removed. In tags use the parser the tag was given instead.
    */
   @Deprecated
   public final Parser parser;
+  /** The filters a template of this engine may call, by name. */
   public final Map<String, Object> filters = new LinkedHashMap<>();
+  /** The tags a template of this engine may use, by name. */
   public final Map<String, TagClass> tags = new LinkedHashMap<>();
 
   /** The engine with every option left at its default. */

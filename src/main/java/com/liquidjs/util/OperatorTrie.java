@@ -18,9 +18,13 @@ public final class OperatorTrie {
 
   /** One node of the trie. */
   public static final class Node<T> {
+    /** The nodes reachable by one more code unit. */
     public final Map<Character, Node<T>> children = new HashMap<>();
+    /** What the name ending here stands for. */
     public T data;
+    /** Whether a name ends here. */
     public boolean end;
+    /** Whether the name ending here must be followed by a boundary. */
     public boolean needBoundary;
   }
 

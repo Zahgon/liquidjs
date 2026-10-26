@@ -20,6 +20,7 @@ public final class JsJson {
     Object visit (Object holder, String key, Object value);
   }
 
+  /** Serialise a value with no indentation and no replacer. */
   public static String stringify (Object value) {
     return stringify(value, "", null);
   }
@@ -159,6 +160,7 @@ public final class JsJson {
   public static class JsonError extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
+    /** A parse failure, carrying the message the source runtime reports. */
     public JsonError (String message) {
       super(message);
     }

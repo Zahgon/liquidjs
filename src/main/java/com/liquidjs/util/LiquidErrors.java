@@ -14,6 +14,7 @@ public class LiquidErrors extends LiquidError {
   /** The errors this one stands for, in the order they were raised. */
   public final List<LiquidError> errors;
 
+  /** Every error one parse or render call collected. */
   public LiquidErrors (List<LiquidError> errors) {
     super(errors.get(0), errors.get(0).getToken());
     this.errors = errors;
@@ -23,6 +24,7 @@ public class LiquidErrors extends LiquidError {
     update();
   }
 
+  /** Whether a value is one of this engine's errors. */
   public static boolean is (Object value) {
     return value instanceof LiquidError && "LiquidErrors".equals(((LiquidError) value).name);
   }

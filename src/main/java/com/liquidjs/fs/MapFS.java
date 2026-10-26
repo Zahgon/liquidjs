@@ -15,6 +15,7 @@ import java.util.Map;
 public class MapFS implements FS {
   private final Map<String, String> mapping;
 
+  /** A file system over templates held in memory, keyed by name. */
   public MapFS (Map<String, String> mapping) {
     this.mapping = mapping;
   }

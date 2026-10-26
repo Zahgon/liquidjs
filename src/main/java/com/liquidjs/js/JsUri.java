@@ -18,10 +18,12 @@ public final class JsUri {
       + "abcdefghijklmnopqrstuvwxyz0123456789-_.!~*'()";
   private static final String URI_UNESCAPED = COMPONENT_UNESCAPED + ";/?:@&=+$,#";
 
+  /** Percent encode everything outside the unreserved set. */
   public static String encodeURIComponent (String str) {
     return encode(str, COMPONENT_UNESCAPED);
   }
 
+  /** Percent encode everything outside the unreserved and reserved sets. */
   public static String encodeURI (String str) {
     return encode(str, URI_UNESCAPED);
   }
@@ -52,6 +54,7 @@ public final class JsUri {
     return out.toString();
   }
 
+  /** Undo percent encoding, raising on a malformed sequence. */
   public static String decodeURIComponent (String str) {
     java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
     StringBuilder out = new StringBuilder();

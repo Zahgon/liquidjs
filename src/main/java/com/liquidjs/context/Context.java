@@ -32,8 +32,11 @@ public class Context {
   public Object environments;
   /** The scope missing variables fall back to. */
   public Object globals;
+  /** Whether the render that owns this context is synchronous. */
   public boolean sync;
+  /** Set by the break tag, read by the loop that owns it. */
   public boolean breakCalled = false;
+  /** Set by the continue tag, read by the loop that owns it. */
   public boolean continueCalled = false;
   /** The normalised options. */
   public final LiquidOptions opts;
@@ -41,8 +44,11 @@ public class Context {
   public Liquid liquid;
   /** Raise when a variable that is not defined is read? */
   public boolean strictVariables;
+  /** Whether a property read sees only own properties. */
   public boolean ownPropertyOnly;
+  /** How much data this render may still create. */
   public Limiter memoryLimit;
+  /** How long this render may still take. */
   public Limiter renderLimit;
 
   /** A context with no scope, the default options and no engine. */

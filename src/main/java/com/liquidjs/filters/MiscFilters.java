@@ -20,6 +20,7 @@ import java.util.Map;
 public final class MiscFilters {
   private MiscFilters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("default", (FilterHandler) (impl, input, args) -> {
       Object value = Js.toValue(input);

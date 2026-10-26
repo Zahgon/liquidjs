@@ -21,10 +21,12 @@ import java.util.List;
 
 /** Writes a value, as an output does. */
 public class EchoTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = EchoTag::new;
 
   private Value value;
 
+  /** The echo tag, read from its token and the tokens that follow it. */
   public EchoTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     this.tokenizer.skipBlank();

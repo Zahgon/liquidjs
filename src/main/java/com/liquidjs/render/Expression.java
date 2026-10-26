@@ -24,6 +24,7 @@ import java.util.List;
 
 /** A conditional or value expression, kept in postfix order so evaluation is one pass. */
 public class Expression {
+  /** The expression in postfix order, operands before their operator. */
   public final List<Token> postfix;
 
   /** An expression, kept in postfix order so evaluation is one pass. */
@@ -75,6 +76,7 @@ public class Expression {
     return evalToken(token, ctx, false);
   }
 
+  /** Evaluate one token, optionally letting an absent variable be null. */
   public static Object evalToken (Token token, Context ctx, boolean lenient) {
     if (token == null) return Js.UNDEFINED;
     if (token.hasContent()) return token.getContent();
@@ -93,6 +95,7 @@ public class Expression {
     return evalTokenValue(token, ctx, false);
   }
 
+  /** Evaluate one token to a value, optionally letting an absent variable be null. */
   public static Object evalTokenValue (Token token, Context ctx, boolean lenient) {
     return Js.toValue(evalToken(token, ctx, lenient));
   }

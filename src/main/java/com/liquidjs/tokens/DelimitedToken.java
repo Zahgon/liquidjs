@@ -9,8 +9,11 @@ import com.liquidjs.util.Characters;
 
 /** A token written between delimiters, whose content is trimmed of blanks and of trim markers. */
 public abstract class DelimitedToken extends Token {
+  /** Whether the blanks before this token are trimmed. */
   public boolean trimLeft = false;
+  /** Whether the blanks after this token are trimmed. */
   public boolean trimRight = false;
+  /** The range of the input the content covers, inside the delimiters. */
   public final int[] contentRange;
 
   protected DelimitedToken (int kind, int contentBegin, int contentEnd, String input, int begin,
@@ -30,6 +33,7 @@ public abstract class DelimitedToken extends Token {
     this.trimRight = markedRight || trimRight;
   }
 
+  /** The content of the token, without its delimiters or trim markers. */
   public String getContentText () {
     return slice(input, contentRange[0], contentRange[1]);
   }

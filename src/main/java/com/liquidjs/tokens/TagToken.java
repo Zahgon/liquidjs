@@ -11,11 +11,14 @@ import com.liquidjs.parser.Tokenizer;
 
 /** A tag, written between the tag delimiters. */
 public class TagToken extends DelimitedToken implements TopLevelToken {
+  /** The name the filter was called by. */
   public final String name;
+  /** The tokenizer the tag reads its own arguments with. */
   public final Tokenizer tokenizer;
   private final String argsText;
   private final boolean argsFollowTheCursor;
 
+  /** A tag, written between the tag delimiters. */
   public TagToken (String input, int begin, int end, LiquidOptions options, String file) {
     this(input, begin + options.tagDelimiterLeft.length(),
         end - options.tagDelimiterRight.length(), input, begin, end, options,

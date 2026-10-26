@@ -28,6 +28,7 @@ import java.util.Map;
 public final class ArrayFilters {
   private ArrayFilters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("join", (FilterHandler) (impl, v, args) -> {
       List<Object> array = Underscore.toArray(Js.toValue(v));

@@ -11,11 +11,13 @@ public class Limiter {
   private final double limit;
   private double base = 0;
 
+  /** A counter over one resource, raising once it passes its limit. */
   public Limiter (String resource, double limit) {
     this.message = resource + " limit exceeded";
     this.limit = limit;
   }
 
+  /** Charge an amount, raising when the total passes the limit. */
   public void use (double count) {
     if (count > 0) {
       Assertions.assertTrue(this.base + count <= this.limit, this.message);
@@ -23,6 +25,7 @@ public class Limiter {
     }
   }
 
+  /** Raise when one amount alone passes the limit. */
   public void check (double count) {
     if (count > 0) {
       Assertions.assertTrue(count <= this.limit, this.message);

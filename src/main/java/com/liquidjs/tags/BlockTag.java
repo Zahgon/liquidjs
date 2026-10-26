@@ -29,13 +29,17 @@ import java.util.regex.Pattern;
 
 /** A named part of a layout, which a child template may fill. */
 public class BlockTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = BlockTag::new;
 
   private static final Pattern NAME = Pattern.compile("\\w+");
 
+  /** The name of the block, or an empty string for the anonymous one. */
   public final String block;
+  /** The nodes of the block's body. */
   public final List<Template> templates = new ArrayList<>();
 
+  /** The block tag, read from its token and the tokens that follow it. */
   public BlockTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     Matcher match = NAME.matcher(token.getArgs());

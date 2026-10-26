@@ -23,11 +23,13 @@ import java.util.Map;
 
 /** Counts up from zero in the scope the caller passed in. */
 public class IncrementTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = IncrementTag::new;
 
   private final IdentifierToken identifier;
   private final String variable;
 
+  /** The increment tag, read from its token and the tokens that follow it. */
   public IncrementTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     this.identifier = this.tokenizer.readIdentifier();

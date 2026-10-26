@@ -14,6 +14,7 @@ import java.util.Map;
 public final class Tags {
   private Tags () {}
 
+  /** Every one of them, under the names a template calls them by. */
   public static Map<String, Object> all () {
     Map<String, Object> tags = Js.newObject();
     tags.put("assign", AssignTag.CLASS);

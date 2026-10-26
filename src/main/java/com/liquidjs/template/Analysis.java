@@ -55,11 +55,13 @@ public final class Analysis {
     }
   }
 
+  /** Analyse templates and report the variables they read. */
   public static StaticAnalysis analyze (List<Template> templates, StaticAnalysisOptions options) {
     StaticAnalysisOptions opts = options == null ? new StaticAnalysisOptions() : options;
     return analyzeTemplates(templates, opts.partials, false);
   }
 
+  /** Analyse templates and report the variables they read. */
   public static StaticAnalysis analyzeSync (List<Template> templates,
                                             StaticAnalysisOptions options) {
     StaticAnalysisOptions opts = options == null ? new StaticAnalysisOptions() : options;

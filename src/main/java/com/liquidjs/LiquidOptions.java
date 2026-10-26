@@ -73,9 +73,13 @@ public class LiquidOptions {
   public boolean trimOutputRight = false;
   /** Strip blanks from the left of an output, up to the newline. */
   public boolean trimOutputLeft = false;
+  /** The delimiter a tag opens with. */
   public String tagDelimiterLeft = "{%";
+  /** The delimiter a tag closes with. */
   public String tagDelimiterRight = "%}";
+  /** The delimiter an output opens with. */
   public String outputDelimiterLeft = "{{";
+  /** The delimiter an output closes with. */
   public String outputDelimiterRight = "}}";
   /** Keep the timezone an input string declares. */
   public boolean preserveTimezones = false;

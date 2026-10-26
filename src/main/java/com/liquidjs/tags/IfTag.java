@@ -25,6 +25,7 @@ import java.util.List;
 
 /** Renders the body of the first branch whose condition holds. */
 public class IfTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = IfTag::new;
 
   /** One branch: its condition and the body to render when the condition holds. */
@@ -41,6 +42,7 @@ public class IfTag extends Tag {
   final List<Branch> branches = new ArrayList<>();
   List<Template> elseTemplates;
 
+  /** The if tag, read from its token and the tokens that follow it. */
   public IfTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     List<List<Template>> current = new ArrayList<>();

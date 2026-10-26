@@ -16,7 +16,9 @@ import java.util.List;
 
 /** One filter of a filter chain, bound to the implementation registered under its name. */
 public class Filter {
+  /** The name the filter was called by. */
   public final String name;
+  /** The arguments the filter was given, unevaluated. */
   public final List<FilterArg> args;
   /** True when the filter marks its value as needing no output escape. */
   public final boolean raw;

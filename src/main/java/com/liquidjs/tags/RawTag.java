@@ -19,10 +19,12 @@ import java.util.List;
 
 /** Writes its body as it was written, without reading any tag in it. */
 public class RawTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = RawTag::new;
 
   private final List<Token> tokens = new ArrayList<>();
 
+  /** The raw tag, read from its token and the tokens that follow it. */
   public RawTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     while (!remainTokens.isEmpty()) {

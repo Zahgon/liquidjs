@@ -32,6 +32,7 @@ public final class UrlFilters {
     return map;
   }
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("url_decode", (FilterHandler) (impl, v, args) ->
         JsUri.decodeURIComponent(Underscore.stringify(v).replace("+", " ")));

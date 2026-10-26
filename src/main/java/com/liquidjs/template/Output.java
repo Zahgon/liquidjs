@@ -20,8 +20,10 @@ import java.util.function.Function;
 
 /** An output: a value expression written between the output delimiters. */
 public class Output extends TemplateImpl<OutputToken> {
+  /** The value expression the output writes. */
   public final Value value;
 
+  /** An output node, with the output escape of the options applied last. */
   public Output (OutputToken token, Liquid liquid) {
     super(token);
     Tokenizer tokenizer = new Tokenizer(token.input, liquid.options.operators, token.file,

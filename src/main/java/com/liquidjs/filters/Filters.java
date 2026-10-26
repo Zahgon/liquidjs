@@ -13,6 +13,7 @@ import java.util.Map;
 public final class Filters {
   private Filters () {}
 
+  /** Every one of them, under the names a template calls them by. */
   public static Map<String, Object> all () {
     Map<String, Object> filters = Js.newObject();
     HtmlFilters.register(filters);

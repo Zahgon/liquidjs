@@ -13,28 +13,34 @@ import java.util.Map;
 public class TablerowloopDrop extends ForloopDrop {
   private final int cols;
 
+  /** The state of a table row loop over a collection, laid out in columns. */
   public TablerowloopDrop (int length, int cols, String collection, String variable) {
     super(length, collection, variable);
     this.length = length;
     this.cols = cols;
   }
 
+  /** The one-based row this turn writes into. */
   public double row () {
     return Math.floor((double) this.i / this.cols) + 1;
   }
 
+  /** The zero-based column this turn writes into. */
   public double col0 () {
     return (double) this.i % this.cols;
   }
 
+  /** The one-based column this turn writes into. */
   public double col () {
     return col0() + 1;
   }
 
+  /** Whether this turn opens a row. */
   public boolean colFirst () {
     return col0() == 0;
   }
 
+  /** Whether this turn closes a row. */
   public boolean colLast () {
     return col() == this.cols;
   }

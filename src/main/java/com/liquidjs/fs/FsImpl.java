@@ -14,7 +14,9 @@ import java.nio.file.Paths;
 
 /** The default file system: templates are read from the host's files. */
 public class FsImpl implements FS {
+  /** The separator between the parts of a path on this host. */
   public static final String SEPARATOR = java.io.File.separator;
+  /** The shared default file system. */
   public static final FsImpl INSTANCE = new FsImpl();
 
   @Override

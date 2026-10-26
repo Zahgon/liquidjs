@@ -9,8 +9,10 @@ package com.liquidjs.util;
 public class AssertionError extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
+  /** The error kind, as the thrown value reports it. */
   public final String name = "AssertionError";
 
+  /** An assertion that did not hold. */
   public AssertionError (String message) {
     super(message);
   }

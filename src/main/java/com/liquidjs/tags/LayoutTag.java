@@ -29,6 +29,7 @@ import java.util.function.BiConsumer;
 
 /** Renders this template inside another one, filling that one's blocks. */
 public class LayoutTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = LayoutTag::new;
 
   private final Hash args;
@@ -36,6 +37,7 @@ public class LayoutTag extends Tag {
   private final Object file;
   private final String currentFile;
 
+  /** The layout tag, read from its token and the tokens that follow it. */
   public LayoutTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     this.file = FilePath.parseFilePath(this.tokenizer, this.liquid, parser);

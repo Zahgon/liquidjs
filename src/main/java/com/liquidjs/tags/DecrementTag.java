@@ -23,11 +23,13 @@ import java.util.Map;
 
 /** Counts down from minus one in the scope the caller passed in. */
 public class DecrementTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = DecrementTag::new;
 
   private final IdentifierToken identifier;
   private final String variable;
 
+  /** The decrement tag, read from its token and the tokens that follow it. */
   public DecrementTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     this.identifier = this.tokenizer.readIdentifier();

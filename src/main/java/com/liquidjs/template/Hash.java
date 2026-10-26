@@ -20,6 +20,7 @@ import java.util.Map;
  * the hash holds foo as 'bar', coo as 2 and reversed as true.
  */
 public class Hash {
+  /** The arguments, in the order they were written. */
   public final Map<String, Token> hash = new LinkedHashMap<>();
 
   /** The key and value arguments read from their source text. */

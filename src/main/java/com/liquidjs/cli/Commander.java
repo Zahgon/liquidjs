@@ -82,16 +82,19 @@ public class Commander {
   private String description = "";
   private String helpAfterError = "";
 
+  /** Name the command, as its usage line reports it. */
   public Commander name (String name) {
     this.name = name;
     return this;
   }
 
+  /** Describe the command, as its help prints it. */
   public Commander description (String description) {
     this.description = description;
     return this;
   }
 
+  /** Declare an option the command cannot run without. */
   public Commander requiredOption (String flags, String description) {
     Option option = new Option(flags, description);
     options.add(option);
@@ -99,6 +102,7 @@ public class Commander {
     return this;
   }
 
+  /** Declare an option the command may be given. */
   public Commander option (String flags, String description) {
     Option option = new Option(flags, description);
     options.add(option);
@@ -106,6 +110,7 @@ public class Commander {
     return this;
   }
 
+  /** The line printed after an option error, pointing at the help. */
   public Commander showHelpAfterError (String message) {
     this.helpAfterError = message;
     return this;
@@ -116,6 +121,7 @@ public class Commander {
     return values;
   }
 
+  /** Read the arguments, raising the command's own error for the first problem. */
   public void parse (String[] argv) {
     String unknown = null;
     int i = 0;
@@ -249,6 +255,7 @@ public class Commander {
     return out.toString();
   }
 
+  /** The line printed after an option error. */
   public String getHelpAfterError () {
     return helpAfterError;
   }

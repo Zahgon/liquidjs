@@ -30,6 +30,7 @@ import java.util.Map;
 
 /** Renders another template in the current scope. */
 public class IncludeTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = IncludeTag::new;
 
   private final Object file;
@@ -37,6 +38,7 @@ public class IncludeTag extends Tag {
   private Token withVar;
   private final Hash hash;
 
+  /** The include tag, read from its token and the tokens that follow it. */
   public IncludeTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     Tokenizer tokenizer = token.tokenizer;

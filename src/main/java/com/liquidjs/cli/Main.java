@@ -24,6 +24,7 @@ import java.util.Map;
 public final class Main {
   private Main () {}
 
+  /** Render the template the arguments name, and exit 1 on any failure. */
   public static void main (String[] args) {
     PrintStream out = new PrintStream(new java.io.FileOutputStream(java.io.FileDescriptor.out),
         true, StandardCharsets.UTF_8);

@@ -16,6 +16,7 @@ import java.util.TimeZone;
 public final class JsDate {
   private JsDate () {}
 
+  /** What a date that could not be read reports as its timestamp. */
   public static final double INVALID = Double.NaN;
 
   private static final String[] MONTHS = {
@@ -26,18 +27,22 @@ public final class JsDate {
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
   };
 
+  /** The full name of a month, January being zero. */
   public static String monthName (int month) {
     return MONTHS[month];
   }
 
+  /** The short name of a month, January being zero. */
   public static String shortMonthName (int month) {
     return MONTHS[month].substring(0, 3);
   }
 
+  /** The full name of a weekday, Sunday being zero. */
   public static String weekdayName (int day) {
     return WEEKDAYS[day];
   }
 
+  /** The short name of a weekday, Sunday being zero. */
   public static String shortWeekdayName (int day) {
     return WEEKDAYS[day].substring(0, 3);
   }
@@ -271,15 +276,24 @@ public final class JsDate {
 
   /** Field accessors on a UTC wall clock derived from an epoch in milliseconds. */
   public static final class Fields {
+    /** The year of the wall clock. */
     public final int year;
+    /** The month of the wall clock, January being zero. */
     public final int month;
+    /** The day of the month of the wall clock. */
     public final int day;
+    /** The day of the week of the wall clock, Sunday being zero. */
     public final int weekday;
+    /** The hour of the wall clock. */
     public final int hour;
+    /** The minute of the wall clock. */
     public final int minute;
+    /** The second of the wall clock. */
     public final int second;
+    /** The millisecond of the wall clock. */
     public final int millisecond;
 
+    /** The wall clock fields of a timestamp, read in UTC. */
     public Fields (double epochMillis) {
       long millis = (long) Math.floor(epochMillis);
       long days = Math.floorDiv(millis, 86400000L);
@@ -308,10 +322,12 @@ public final class JsDate {
     return toLocaleDateString(fields) + ", " + toLocaleTimeString(fields);
   }
 
+  /** The date as the en-US locale writes it. */
   public static String toLocaleDateString (Fields fields) {
     return (fields.month + 1) + "/" + fields.day + "/" + fields.year;
   }
 
+  /** The time as the en-US locale writes it. */
   public static String toLocaleTimeString (Fields fields) {
     int hour12 = fields.hour % 12 == 0 ? 12 : fields.hour % 12;
     return hour12 + ":" + JsString.padStart(String.valueOf(fields.minute), 2, "0")

@@ -12,10 +12,12 @@ import com.liquidjs.js.Js;
 public final class Booleans {
   private Booleans () {}
 
+  /** Whether a value counts as true in a condition. */
   public static boolean isTruthy (Object value, Context ctx) {
     return !isFalsy(value, ctx);
   }
 
+  /** Whether a value counts as false in a condition. */
   public static boolean isFalsy (Object input, Context ctx) {
     Object value = Js.toValue(input);
     if (ctx != null && ctx.opts.jsTruthy) {

@@ -28,6 +28,7 @@ public final class Js {
     }
   };
 
+  /** Whether a value is the absent value. */
   public static boolean isUndefined (Object value) {
     return value == UNDEFINED;
   }
@@ -37,14 +38,17 @@ public final class Js {
     return value == null || value == UNDEFINED;
   }
 
+  /** Whether a value is a string. */
   public static boolean isString (Object value) {
     return value instanceof String;
   }
 
+  /** Whether a value is a number. */
   public static boolean isNumber (Object value) {
     return value instanceof Double;
   }
 
+  /** Whether a value is a boolean. */
   public static boolean isBoolean (Object value) {
     return value instanceof Boolean;
   }
@@ -59,6 +63,7 @@ public final class Js {
     return (Map<String, Object>) value;
   }
 
+  /** Whether a value is an array. */
   public static boolean isArray (Object value) {
     return value instanceof List;
   }
@@ -222,10 +227,12 @@ public final class Js {
     return ln < rn;
   }
 
+  /** The abstract relational comparison, the other way round. */
   public static boolean greaterThan (Object lhs, Object rhs) {
     return lessThan(rhs, lhs);
   }
 
+  /** The abstract relational comparison, allowing equality. */
   public static boolean lessOrEqual (Object lhs, Object rhs) {
     Object l = toPrimitive(lhs);
     Object r = toPrimitive(rhs);
@@ -236,6 +243,7 @@ public final class Js {
     return ln <= rn;
   }
 
+  /** The abstract relational comparison the other way round, allowing equality. */
   public static boolean greaterOrEqual (Object lhs, Object rhs) {
     return lessOrEqual(rhs, lhs);
   }
@@ -261,6 +269,7 @@ public final class Js {
     return 0;
   }
 
+  /** A number as the boxed double the value model uses. */
   public static Double number (double value) {
     return value;
   }

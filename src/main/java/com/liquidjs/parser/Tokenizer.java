@@ -39,8 +39,11 @@ public class Tokenizer {
   public int p;
   /** The position reading stops at. */
   public int N;
+  /** Whether a parenthesised expression may stand where a value may. */
   public boolean groupedExpressions;
+  /** The template this tokenizer reads. */
   public final String input;
+  /** The file, or null for a template given as text. */
   public final String file;
 
   private int rawBeginAt = -1;

@@ -13,6 +13,7 @@ import com.liquidjs.tokens.HTMLToken;
 public class Html extends TemplateImpl<HTMLToken> {
   private final String str;
 
+  /** A node writing the template text its token covers. */
   public Html (HTMLToken token) {
     super(token);
     this.str = token.getContentText();

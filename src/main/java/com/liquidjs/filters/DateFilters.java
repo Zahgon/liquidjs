@@ -19,6 +19,7 @@ import java.util.Map;
 public final class DateFilters {
   private DateFilters () {}
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("date", (FilterHandler) (impl, v, args) ->
         date(impl, v, Args.at(args, 0), Args.at(args, 1)));

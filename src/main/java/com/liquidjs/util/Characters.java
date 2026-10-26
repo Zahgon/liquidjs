@@ -12,13 +12,21 @@ package com.liquidjs.util;
 public final class Characters {
   private Characters () {}
 
+  /** A word character, which a name may be made of. */
   public static final int WORD = 1;
+  /** A character an operator may be made of. */
   public static final int OPERATOR = 2;
+  /** A blank, newlines included. */
   public static final int BLANK = 4;
+  /** A quotation mark. */
   public static final int QUOTE = 8;
+  /** A blank that is not a newline. */
   public static final int INLINE_BLANK = 16;
+  /** A digit. */
   public static final int NUMBER = 32;
+  /** A sign a number may start with. */
   public static final int SIGN = 64;
+  /** A quotation mark that is not a delimiter. */
   public static final int PUNCTUATION = 128;
 
   private static final int[] ASCII = {
@@ -43,15 +51,18 @@ public final class Characters {
     TYPES[8221] = PUNCTUATION;
   }
 
+  /** The character classes a code unit belongs to. */
   public static int typeOf (char ch) {
     return TYPES[ch];
   }
 
+  /** Whether the first code unit of a string is a word character. */
   public static boolean isWord (String ch) {
     if (ch == null || ch.isEmpty()) return false;
     return isWord(ch.charAt(0));
   }
 
+  /** Whether a code unit is a word character. */
   public static boolean isWord (char ch) {
     int code = ch;
     return code >= 128 ? TYPES[code] == 0 : (TYPES[code] & WORD) != 0;

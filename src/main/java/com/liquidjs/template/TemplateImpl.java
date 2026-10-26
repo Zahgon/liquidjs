@@ -9,6 +9,7 @@ import com.liquidjs.tokens.Token;
 
 /** A template node that keeps the token it was built from. */
 public abstract class TemplateImpl<T extends Token> implements Template {
+  /** The token this node was built from. */
   public final T token;
 
   protected TemplateImpl (T token) {

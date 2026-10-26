@@ -18,6 +18,7 @@ import java.util.List;
 public final class WhitespaceCtrl {
   private WhitespaceCtrl () {}
 
+  /** Trim the blanks around every tag and output that asked for it. */
   public static void whiteSpaceCtrl (List<Token> tokens, LiquidOptions options) {
     boolean inRaw = false;
 

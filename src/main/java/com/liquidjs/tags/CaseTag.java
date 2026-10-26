@@ -25,6 +25,7 @@ import java.util.List;
 
 /** Renders the branch whose value equals the one the tag was given. */
 public class CaseTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = CaseTag::new;
 
   private static final class Branch {
@@ -40,6 +41,7 @@ public class CaseTag extends Tag {
   private final List<Branch> branches = new ArrayList<>();
   private final List<Template> elseTemplates = new ArrayList<>();
 
+  /** The case tag, read from its token and the tokens that follow it. */
   public CaseTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     this.value = new Value(this.tokenizer.readFilteredValue(), this.liquid);

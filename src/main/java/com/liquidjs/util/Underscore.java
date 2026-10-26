@@ -78,20 +78,24 @@ public final class Underscore {
     return Double.isNaN(number) || number == 0 ? 0 : number;
   }
 
+  /** The numbers from one bound up to another, the upper one excluded. */
   public static List<Object> range (int start, int stop) {
     return range(start, stop, 1);
   }
 
+  /** The numbers from one bound up to another, in steps. */
   public static List<Object> range (int start, int stop, int step) {
     List<Object> out = new ArrayList<>();
     for (int i = start; i < stop; i += step) out.add((double) i);
     return out;
   }
 
+  /** A value as a string, padded on the left to a length. */
   public static String padStart (Object value, int length, String pad) {
     return JsString.padStart(Js.toStringValue(value), length, pad);
   }
 
+  /** A value as a string, padded on the right to a length. */
   public static String padEnd (Object value, int length, String pad) {
     return JsString.padEnd(Js.toStringValue(value), length, pad);
   }
@@ -109,6 +113,7 @@ public final class Underscore {
     return hasLowerCase ? JsString.toUpperCase(str) : JsString.toLowerCase(str);
   }
 
+  /** The string, shortened with three dots when it is longer than a maximum. */
   public static String ellipsis (String str, int max) {
     return str.length() > max ? str.substring(0, max - 3) + "..." : str;
   }
@@ -161,6 +166,7 @@ public final class Underscore {
     return out;
   }
 
+  /** The last element of an array, or the absent value when it is empty. */
   public static Object last (List<Object> array) {
     return array.isEmpty() ? Js.UNDEFINED : array.get(array.size() - 1);
   }

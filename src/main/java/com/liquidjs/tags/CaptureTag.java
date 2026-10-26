@@ -23,12 +23,14 @@ import java.util.List;
 
 /** Renders its body and keeps the output under a name. */
 public class CaptureTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = CaptureTag::new;
 
   private final Token identifier;
   private final String variable;
   private final List<Template> templates = new ArrayList<>();
 
+  /** The capture tag, read from its token and the tokens that follow it. */
   public CaptureTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     this.identifier = readVariable();

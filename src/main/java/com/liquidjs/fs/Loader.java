@@ -16,6 +16,7 @@ public class Loader {
   private final LiquidOptions options;
   private final boolean relative;
 
+  /** A loader over the directories the options name. */
   public Loader (LiquidOptions options) {
     this.options = options;
     if (options.relativeReference) {
@@ -38,6 +39,7 @@ public class Loader {
     return false;
   }
 
+  /** The path of a template, raising when no directory holds it. */
   public String lookup (String file, LookupType type, String currentFile) {
     List<String> dirs = options.directories(type);
     for (String filepath : candidates(file, dirs, currentFile)) {
@@ -55,6 +57,7 @@ public class Loader {
     throw lookupError(file, dirs);
   }
 
+  /** Every path a template could be at, in the order they are tried. */
   public List<String> candidates (String file, List<String> dirs, String currentFile) {
     List<String> out = new ArrayList<>();
     FS fs = options.fs;

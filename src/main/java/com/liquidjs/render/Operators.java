@@ -88,6 +88,7 @@ public final class Operators {
     return true;
   }
 
+  /** Whether an array holds a value, compared as the equality operator compares. */
   public static boolean arrayIncludes (List<Object> array, Object item) {
     for (Object value : array) {
       if (equals(value, item)) return true;

@@ -18,6 +18,7 @@ public class BlankDrop extends EmptyDrop {
     return super.equalsValue(input);
   }
 
+  /** Whether a value is one of this engine's errors. */
   public static boolean is (Object value) {
     return value instanceof BlankDrop;
   }

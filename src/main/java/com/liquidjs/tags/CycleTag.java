@@ -22,11 +22,13 @@ import java.util.Map;
 
 /** Writes the next of its candidates each time it is rendered. */
 public class CycleTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = CycleTag::new;
 
   private final List<Token> candidates = new ArrayList<>();
   private Token group;
 
+  /** The cycle tag, read from its token and the tokens that follow it. */
   public CycleTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     Token group = this.tokenizer.readValue();

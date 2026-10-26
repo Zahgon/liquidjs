@@ -17,6 +17,7 @@ public enum LookupType {
     this.key = key;
   }
 
+  /** The option name this lookup type reads its directories from. */
   public String key () {
     return key;
   }

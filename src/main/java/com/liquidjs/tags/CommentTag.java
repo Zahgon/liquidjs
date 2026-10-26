@@ -18,8 +18,10 @@ import java.util.List;
 
 /** Drops everything up to its end tag. */
 public class CommentTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = CommentTag::new;
 
+  /** The comment tag, read from its token and the tokens that follow it. */
   public CommentTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     while (!remainTokens.isEmpty()) {

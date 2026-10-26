@@ -14,7 +14,9 @@ import java.util.List;
 
 /** The base of every tag. */
 public abstract class Tag extends TemplateImpl<TagToken> {
+  /** The name the filter was called by. */
   public final String name;
+  /** The engine the tag belongs to. */
   public final Liquid liquid;
   protected final Tokenizer tokenizer;
 

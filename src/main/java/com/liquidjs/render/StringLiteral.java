@@ -36,6 +36,7 @@ public final class StringLiteral {
     return code - 48;
   }
 
+  /** The text a quoted string stands for, with its escape sequences read. */
   public static String parseStringLiteral (String str) {
     StringBuilder ret = new StringBuilder();
     for (int i = 1; i < str.length() - 1; i++) {

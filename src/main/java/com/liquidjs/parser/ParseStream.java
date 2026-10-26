@@ -28,26 +28,31 @@ public class ParseStream {
   private boolean stopRequested = false;
   private final BiFunction<Token, List<Token>, Template> parseToken;
 
+  /** A stream over the tokens that follow a tag. */
   public ParseStream (List<Token> tokens, BiFunction<Token, List<Token>, Template> parseToken) {
     this.tokens = tokens;
     this.parseToken = parseToken;
   }
 
+  /** Handle one kind of event, which is given the token or template it carries. */
   public ParseStream on (String name, Handler cb) {
     handlers.put(name, cb);
     return this;
   }
 
+  /** Handle one kind of event whose argument does not matter. */
   public ParseStream on (String name, Runnable cb) {
     handlers.put(name, arg -> cb.run());
     return this;
   }
 
+  /** Handle a tag by name, as in tag:endfor. */
   public ParseStream onTag (String name, Consumer<TagToken> cb) {
     handlers.put(name, arg -> cb.accept((TagToken) arg));
     return this;
   }
 
+  /** Handle every node the stream parsed. */
   public ParseStream onTemplate (Consumer<Template> cb) {
     handlers.put("template", arg -> cb.accept((Template) arg));
     return this;
@@ -60,6 +65,7 @@ public class ParseStream {
     return true;
   }
 
+  /** Hand out tokens until the tag stops the stream or the tokens run out. */
   public ParseStream start () {
     trigger("start", null);
     while (!stopRequested && !tokens.isEmpty()) {
@@ -75,6 +81,7 @@ public class ParseStream {
     return this;
   }
 
+  /** Stop the stream, leaving the tokens that are left to the caller. */
   public ParseStream stop () {
     this.stopRequested = true;
     return this;

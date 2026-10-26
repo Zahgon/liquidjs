@@ -22,12 +22,14 @@ import java.util.List;
 
 /** Assigns a value to a name in the template's own scope. */
 public class AssignTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = AssignTag::new;
 
   private final String key;
   private final Value value;
   private final IdentifierToken identifier;
 
+  /** The assign tag, read from its token and the tokens that follow it. */
   public AssignTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     this.identifier = this.tokenizer.readIdentifier();

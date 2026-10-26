@@ -18,7 +18,9 @@ import java.util.List;
 
 /** A value expression with its filters, as in: "foobar" | truncate: 3 */
 public class Value {
+  /** The filters applied to the value, in order. */
   public final List<Filter> filters = new ArrayList<>();
+  /** The expression the filters are applied to. */
   public final Expression initial;
 
   /** A value expression read from its source text. */

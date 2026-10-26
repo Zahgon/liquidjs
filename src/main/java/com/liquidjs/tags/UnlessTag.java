@@ -24,6 +24,7 @@ import java.util.List;
 
 /** Renders its body unless the condition holds. */
 public class UnlessTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = UnlessTag::new;
 
   private static final class Branch {
@@ -41,6 +42,7 @@ public class UnlessTag extends Tag {
   private final List<Branch> branches = new ArrayList<>();
   private final List<Template> elseTemplates = new ArrayList<>();
 
+  /** The unless tag, read from its token and the tokens that follow it. */
   public UnlessTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     List<List<Template>> current = new ArrayList<>();

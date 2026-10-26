@@ -32,6 +32,7 @@ import java.util.Map;
 
 /** Renders its body once per element, laid out as a table. */
 public class TablerowTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = TablerowTag::new;
 
   private final String variable;
@@ -39,6 +40,7 @@ public class TablerowTag extends Tag {
   private final List<Template> templates = new ArrayList<>();
   private final Token collection;
 
+  /** The tablerow tag, read from its token and the tokens that follow it. */
   public TablerowTag (TagToken tagToken, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(tagToken, remainTokens, liquid);
     IdentifierToken variable = this.tokenizer.readIdentifier();

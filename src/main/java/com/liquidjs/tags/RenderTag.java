@@ -31,6 +31,7 @@ import java.util.Map;
 
 /** Renders another template in a scope of its own. */
 public class RenderTag extends Tag {
+  /** How the parser builds this tag. */
   public static final TagClass CLASS = RenderTag::new;
 
   /** A name bound to a value, optionally under an alias. */
@@ -50,6 +51,7 @@ public class RenderTag extends Tag {
   private Binding with;
   private Binding forBinding;
 
+  /** The render tag, read from its token and the tokens that follow it. */
   public RenderTag (TagToken token, List<Token> remainTokens, Liquid liquid, Parser parser) {
     super(token, remainTokens, liquid);
     Tokenizer tokenizer = this.tokenizer;

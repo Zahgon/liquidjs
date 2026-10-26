@@ -41,6 +41,7 @@ public final class StringFilters {
   private static final Pattern NON_CJK_WORD =
       Pattern.compile("[^" + CJK + JsString.WHITESPACE_CLASS + "]+");
 
+  /** Register these filters under the names a template calls them by. */
   public static void register (Map<String, Object> filters) {
     filters.put("append", (FilterHandler) (impl, v, args) -> {
       Assertions.assertTrue(args.size() == 1, "append expect 2 arguments");

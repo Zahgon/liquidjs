@@ -7,10 +7,15 @@ package com.liquidjs.tokens;
 
 /** A range of the template input, with the kind of syntax it holds. */
 public abstract class Token {
+  /** What kind of syntax this token holds. */
   public final int kind;
+  /** The template this tokenizer reads. */
   public final String input;
+  /** Where the token starts in the input. */
   public int begin;
+  /** Where the token ends in the input. */
   public int end;
+  /** The file, or null for a template given as text. */
   public final String file;
 
   protected Token (int kind, String input, int begin, int end, String file) {
@@ -58,6 +63,7 @@ public abstract class Token {
     return false;
   }
 
+  /** The value the token carries, for a token that carries one. */
   public Object getContent () {
     return null;
   }

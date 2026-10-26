@@ -9,6 +9,7 @@ import com.liquidjs.LiquidOptions;
 
 /** One line of a liquid tag, which is a tag written without its delimiters. */
 public class LiquidTagToken extends TagToken {
+  /** One line of a liquid tag, which carries no delimiters of its own. */
   public LiquidTagToken (String input, int begin, int end, LiquidOptions options, String file) {
     super(input, begin, end, input, begin, end, options, false, false, file, true,
         "illegal liquid tag syntax");

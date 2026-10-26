@@ -22,6 +22,7 @@ public class PartialScope {
    */
   public final List<Object> scope;
 
+  /** The scope a partial template is analysed in. */
   public PartialScope (String name, boolean isolated, List<Object> scope) {
     this.name = name;
     this.isolated = isolated;
