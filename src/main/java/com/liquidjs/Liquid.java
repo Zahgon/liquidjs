@@ -42,6 +42,7 @@ public class Liquid {
   public final Map<String, Object> filters = new LinkedHashMap<>();
   public final Map<String, TagClass> tags = new LinkedHashMap<>();
 
+  /** The engine with every option left at its default. */
   public Liquid () {
     this(new LinkedHashMap<>());
   }
@@ -51,6 +52,7 @@ public class Liquid {
     this(LiquidOptions.normalize(opts));
   }
 
+  /** The engine, with options that are already normalised. */
   public Liquid (LiquidOptions options) {
     this.options = options;
     this.parser = new Parser(this);
@@ -62,14 +64,17 @@ public class Liquid {
     }
   }
 
+  /** Parse a template into the nodes that render it. */
   public List<Template> parse (String html) {
     return parse(html, null);
   }
 
+  /** Parse a template that came from a file, so its errors name that file. */
   public List<Template> parse (String html, String filepath) {
     return new Parser(this).parse(html, filepath);
   }
 
+  /** Render parsed templates into a context; the entry points below use this. */
   public Object renderInternal (List<Template> tpl, Object scope, RenderOptions renderOptions) {
     Context ctx = scope instanceof Context
         ? (Context) scope
@@ -77,126 +82,153 @@ public class Liquid {
     return this.renderer.renderTemplates(tpl, ctx);
   }
 
+  /** Render parsed templates, completing with what they wrote. */
   public CompletableFuture<Object> render (List<Template> tpl, Object scope) {
     return render(tpl, scope, null);
   }
 
+  /** Render parsed templates with per-call options, completing with what they wrote. */
   public CompletableFuture<Object> render (List<Template> tpl, Object scope,
                                            RenderOptions renderOptions) {
     return CompletableFuture.completedFuture(
         renderInternal(tpl, scope, withSync(renderOptions, false)));
   }
 
+  /** Render parsed templates and return what they wrote. */
   public Object renderSync (List<Template> tpl, Object scope) {
     return renderSync(tpl, scope, null);
   }
 
+  /** Render parsed templates with per-call options and return what they wrote. */
   public Object renderSync (List<Template> tpl, Object scope, RenderOptions renderOptions) {
     return renderInternal(tpl, scope, withSync(renderOptions, true));
   }
 
+  /** Render parsed templates into a stream, readable before the render finishes. */
   public Reader renderToNodeStream (List<Template> tpl, Object scope) {
     return renderToNodeStream(tpl, scope, new RenderOptions());
   }
 
+  /** Render parsed templates into a stream, with per-call options. */
   public Reader renderToNodeStream (List<Template> tpl, Object scope,
                                     RenderOptions renderOptions) {
     Context ctx = new Context(scope, this.options, renderOptions, this);
     return this.renderer.renderTemplatesToNodeStream(tpl, ctx);
   }
 
+  /** Parse and render a template in one step; the entry points below use this. */
   public Object parseAndRenderInternal (String html, Object scope, RenderOptions renderOptions) {
     List<Template> tpl = parse(html);
     return renderInternal(tpl, scope, renderOptions);
   }
 
+  /** Parse and render a template, completing with what it wrote. */
   public CompletableFuture<Object> parseAndRender (String html, Object scope) {
     return parseAndRender(html, scope, null);
   }
 
+  /** Parse and render a template with per-call options, completing with what it wrote. */
   public CompletableFuture<Object> parseAndRender (String html, Object scope,
                                                    RenderOptions renderOptions) {
     return CompletableFuture.completedFuture(
         parseAndRenderInternal(html, scope, withSync(renderOptions, false)));
   }
 
+  /** Parse and render a template with no scope and return what it wrote. */
   public Object parseAndRenderSync (String html) {
     return parseAndRenderSync(html, null, null);
   }
 
+  /** Parse and render a template against a scope and return what it wrote. */
   public Object parseAndRenderSync (String html, Object scope) {
     return parseAndRenderSync(html, scope, null);
   }
 
+  /** Parse and render a template with per-call options and return what it wrote. */
   public Object parseAndRenderSync (String html, Object scope, RenderOptions renderOptions) {
     return parseAndRenderInternal(html, scope, withSync(renderOptions, true));
   }
 
+  /** Parse a partial template, looked up in the partials directories. */
   public List<Template> parsePartialFile (String file, boolean sync, String currentFile) {
     return new Parser(this).parseFile(file, LookupType.Partials, currentFile);
   }
 
+  /** Parse a layout template, looked up in the layouts directories. */
   public List<Template> parseLayoutFile (String file, boolean sync, String currentFile) {
     return new Parser(this).parseFile(file, LookupType.Layouts, currentFile);
   }
 
+  /** Parse a template file, looked up in the directories of one lookup type. */
   public List<Template> parseFileInternal (String file, boolean sync, LookupType lookupType,
                                            String currentFile) {
     return new Parser(this).parseFile(file,
         lookupType == null ? LookupType.Root : lookupType, currentFile);
   }
 
+  /** Parse a template file, completing with its nodes. */
   public CompletableFuture<List<Template>> parseFile (String file) {
     return parseFile(file, LookupType.Root);
   }
 
+  /** Parse a template file of one lookup type, completing with its nodes. */
   public CompletableFuture<List<Template>> parseFile (String file, LookupType lookupType) {
     return CompletableFuture.completedFuture(parseFileInternal(file, false, lookupType, null));
   }
 
+  /** Parse a template file and return its nodes. */
   public List<Template> parseFileSync (String file) {
     return parseFileSync(file, LookupType.Root);
   }
 
+  /** Parse a template file of one lookup type and return its nodes. */
   public List<Template> parseFileSync (String file, LookupType lookupType) {
     return parseFileInternal(file, true, lookupType, null);
   }
 
+  /** Parse and render a template file; the entry points below use this. */
   public Object renderFileInternal (String file, Object ctx, RenderOptions options,
                                     LookupType lookupType) {
     List<Template> templates = parseFileInternal(file, options.sync, lookupType, null);
     return renderInternal(templates, ctx, options);
   }
 
+  /** Parse and render a template file, completing with what it wrote. */
   public CompletableFuture<Object> renderFile (String file, Object ctx) {
     return renderFile(file, ctx, null, null);
   }
 
+  /** Parse and render a template file with per-call options, completing with what it wrote. */
   public CompletableFuture<Object> renderFile (String file, Object ctx, RenderOptions options,
                                                LookupType lookupType) {
     return CompletableFuture.completedFuture(
         renderFileInternal(file, ctx, withSync(options, false), lookupType));
   }
 
+  /** Parse and render a template file and return what it wrote. */
   public Object renderFileSync (String file, Object ctx) {
     return renderFileSync(file, ctx, null, null);
   }
 
+  /** Parse and render a template file with per-call options and return what it wrote. */
   public Object renderFileSync (String file, Object ctx, RenderOptions options,
                                 LookupType lookupType) {
     return renderFileInternal(file, ctx, withSync(options, true), lookupType);
   }
 
+  /** Parse a template file and render it into a stream. */
   public CompletableFuture<Reader> renderFileToNodeStream (String file, Object scope) {
     return renderFileToNodeStream(file, scope, new RenderOptions());
   }
 
+  /** Parse a template file and render it into a stream, with per-call options. */
   public CompletableFuture<Reader> renderFileToNodeStream (String file, Object scope,
                                                            RenderOptions renderOptions) {
     List<Template> templates = parseFileInternal(file, false, LookupType.Root, null);
     return CompletableFuture.completedFuture(renderToNodeStream(templates, scope, renderOptions));
   }
 
+  /** Evaluate a value expression; the entry points below use this. */
   public Object evalValueInternal (String str, Object scope) {
     Value value = new Value(str, this);
     Context ctx = scope instanceof Context
@@ -205,22 +237,27 @@ public class Liquid {
     return value.value(ctx);
   }
 
+  /** Evaluate a value expression, completing with its value. */
   public CompletableFuture<Object> evalValue (String str, Object scope) {
     return CompletableFuture.completedFuture(evalValueInternal(str, scope));
   }
 
+  /** Evaluate a value expression and return its value. */
   public Object evalValueSync (String str, Object scope) {
     return evalValueInternal(str, scope);
   }
 
+  /** Register a filter under a name, replacing any filter of that name. */
   public void registerFilter (String name, Object filter) {
     this.filters.put(name, filter);
   }
 
+  /** Forget the filter registered under a name. */
   public void unregisterFilter (String name) {
     this.filters.remove(name);
   }
 
+  /** Register a tag under a name, replacing any tag of that name. */
   public void registerTag (String name, TagClass tag) {
     this.tags.put(name, tag);
   }
@@ -248,6 +285,7 @@ public class Liquid {
       this.liquid = liquid;
     }
 
+    /** Render a template file for a framework, adding its view root to the lookup paths. */
     public void render (String root, String filePath, Object ctx,
                         BiConsumer<Throwable, Object> callback) {
       if (firstCall) {
@@ -265,40 +303,49 @@ public class Liquid {
     }
   }
 
+  /** Analyse parsed templates, completing with what they read. */
   public CompletableFuture<StaticAnalysis> analyze (List<Template> template) {
     return analyze(template, new StaticAnalysisOptions());
   }
 
+  /** Analyse parsed templates with analysis options, completing with what they read. */
   public CompletableFuture<StaticAnalysis> analyze (List<Template> template,
                                                     StaticAnalysisOptions options) {
     return CompletableFuture.completedFuture(Analysis.analyze(template, options));
   }
 
+  /** Analyse parsed templates and report what they read. */
   public StaticAnalysis analyzeSync (List<Template> template) {
     return analyzeSync(template, new StaticAnalysisOptions());
   }
 
+  /** Analyse parsed templates with analysis options and report what they read. */
   public StaticAnalysis analyzeSync (List<Template> template, StaticAnalysisOptions options) {
     return Analysis.analyzeSync(template, options);
   }
 
+  /** Parse and analyse a template, completing with what it reads. */
   public CompletableFuture<StaticAnalysis> parseAndAnalyze (String html) {
     return parseAndAnalyze(html, null, new StaticAnalysisOptions());
   }
 
+  /** Parse and analyse a named template with analysis options, completing with what it reads. */
   public CompletableFuture<StaticAnalysis> parseAndAnalyze (String html, String filename,
                                                             StaticAnalysisOptions options) {
     return CompletableFuture.completedFuture(Analysis.analyze(parse(html, filename), options));
   }
 
+  /** Parse and analyse a template and report what it reads. */
   public StaticAnalysis parseAndAnalyzeSync (String html) {
     return parseAndAnalyzeSync(html, null, new StaticAnalysisOptions());
   }
 
+  /** Parse and analyse a named template and report what it reads. */
   public StaticAnalysis parseAndAnalyzeSync (String html, String filename) {
     return parseAndAnalyzeSync(html, filename, new StaticAnalysisOptions());
   }
 
+  /** Parse and analyse a named template with analysis options and report what it reads. */
   public StaticAnalysis parseAndAnalyzeSync (String html, String filename,
                                              StaticAnalysisOptions options) {
     return Analysis.analyzeSync(parse(html, filename), options);
@@ -314,6 +361,7 @@ public class Liquid {
     return variablesSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable of parsed templates, without its properties. */
   public List<String> variablesSync (List<Template> template, StaticAnalysisOptions options) {
     return new ArrayList<>(Analysis.analyzeSync(template, options).variables.keySet());
   }
@@ -328,6 +376,7 @@ public class Liquid {
     return fullVariablesSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable of parsed templates, including its properties and paths. */
   public List<String> fullVariablesSync (List<Template> template, StaticAnalysisOptions options) {
     return pathsOf(Analysis.analyzeSync(template, options).variables);
   }
@@ -342,6 +391,7 @@ public class Liquid {
     return variableSegmentsSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable of parsed templates, each one as a list of its segments. */
   public List<Object> variableSegmentsSync (List<Template> template,
                                             StaticAnalysisOptions options) {
     return segmentsOf(Analysis.analyzeSync(template, options).variables);
@@ -357,6 +407,7 @@ public class Liquid {
     return globalVariablesSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable parsed templates expect to be given, without its properties. */
   public List<String> globalVariablesSync (List<Template> template,
                                            StaticAnalysisOptions options) {
     return new ArrayList<>(Analysis.analyzeSync(template, options).globals.keySet());
@@ -372,6 +423,7 @@ public class Liquid {
     return globalFullVariablesSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable parsed templates expect to be given, with its properties and paths. */
   public List<String> globalFullVariablesSync (List<Template> template,
                                                StaticAnalysisOptions options) {
     return pathsOf(Analysis.analyzeSync(template, options).globals);
@@ -387,6 +439,7 @@ public class Liquid {
     return globalVariableSegmentsSync(parse(template), new StaticAnalysisOptions());
   }
 
+  /** Every variable parsed templates expect to be given, as lists of segments. */
   public List<Object> globalVariableSegmentsSync (List<Template> template,
                                                   StaticAnalysisOptions options) {
     return segmentsOf(Analysis.analyzeSync(template, options).globals);

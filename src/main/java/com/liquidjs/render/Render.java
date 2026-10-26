@@ -39,10 +39,12 @@ public class Render {
     return stream;
   }
 
+  /** Render nodes and return what they wrote. */
   public Object renderTemplates (List<Template> templates, Context ctx) {
     return renderTemplates(templates, ctx, null);
   }
 
+  /** Render nodes into an emitter, collecting errors when the options ask for it. */
   public Object renderTemplates (List<Template> templates, Context ctx, Emitter into) {
     Emitter emitter = into;
     if (emitter == null) {

@@ -22,20 +22,24 @@ import java.util.Map;
 public class Hash {
   public final Map<String, Token> hash = new LinkedHashMap<>();
 
+  /** The key and value arguments read from their source text. */
   public Hash (String input) {
     this(new Tokenizer(input, Js.newObject()), null);
   }
 
+  /** The key and value arguments, with the separator between a key and its value. */
   public Hash (String input, Object jekyllStyle) {
     this(new Tokenizer(input, Js.newObject()), jekyllStyle);
   }
 
+  /** The key and value arguments read from where a tokenizer stands. */
   public Hash (Tokenizer tokenizer, Object jekyllStyle) {
     for (HashToken token : tokenizer.readHashes(jekyllStyle)) {
       this.hash.put(token.name.content, token.value);
     }
   }
 
+  /** Evaluate every argument; one written without a value is true. */
   public Map<String, Object> render (Context ctx) {
     Map<String, Object> rendered = Js.newObject();
     for (Map.Entry<String, Token> entry : hash.entrySet()) {

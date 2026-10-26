@@ -17,19 +17,23 @@ public class Variable {
   public final List<Object> segments;
   public final VariableLocation location;
 
+  /** A variable read at one place in a template. */
   public Variable (List<Object> segments, VariableLocation location) {
     this.segments = segments;
     this.location = location;
   }
 
+  /** The one-based row the variable was read at. */
   public int getRow () {
     return location.row;
   }
 
+  /** The one-based column the variable was read at. */
   public int getCol () {
     return location.col;
   }
 
+  /** The file the variable was read in, or null for a template given as text. */
   public String getFile () {
     return location.file;
   }
@@ -80,6 +84,7 @@ public class Variable {
     return buf.toString();
   }
 
+  /** A path as a string, in dot notation where a segment allows it. */
   public static String segmentsString (List<Object> segments) {
     return segmentsString(segments, false);
   }

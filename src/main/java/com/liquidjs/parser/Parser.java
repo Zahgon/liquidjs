@@ -35,6 +35,7 @@ public class Parser {
   private final Loader loader;
   private final Limiter parseLimit;
 
+  /** A parser for one engine, with its options, its loader and its cache. */
   public Parser (Liquid liquid) {
     this.liquid = liquid;
     this.cache = liquid.options.cache;
@@ -43,10 +44,12 @@ public class Parser {
     this.parseLimit = new Limiter("parse length", liquid.options.parseLimit);
   }
 
+  /** Parse a template into the nodes that render it. */
   public List<Template> parse (String html) {
     return parse(html, null);
   }
 
+  /** Parse a template that came from a file, so its errors name that file. */
   public List<Template> parse (String html, String filepath) {
     String text = html == null ? "null" : html;
     parseLimit.use(text.length());
@@ -56,6 +59,7 @@ public class Parser {
     return parseTokens(tokens);
   }
 
+  /** Parse tokens into nodes, collecting errors when the options ask for it. */
   public List<Template> parseTokens (List<Token> tokens) {
     List<Template> templates = new ArrayList<>();
     List<LiquidError> errors = new ArrayList<>();
@@ -75,6 +79,7 @@ public class Parser {
     return templates;
   }
 
+  /** Parse one token into a node, wrapping any error with its position. */
   public Template parseToken (Token token, List<Token> remainTokens) {
     try {
       if (token.kind == com.liquidjs.parser.TokenKind.Tag) {
@@ -93,10 +98,12 @@ public class Parser {
     }
   }
 
+  /** A stream a tag drives to parse the tokens that belong to it. */
   public ParseStream parseStream (List<Token> tokens) {
     return new ParseStream(tokens, (token, remaining) -> parseToken(token, remaining));
   }
 
+  /** Parse a template file, through the cache when there is one. */
   public List<Template> parseFile (String file, LookupType type, String currentFile) {
     if (cache != null) return parseFileCached(file, type, currentFile);
     return parseFileUncached(file, type, currentFile);

@@ -21,6 +21,7 @@ public abstract class Token {
     this.file = file;
   }
 
+  /** The text of the template this token covers. */
   public String getText () {
     return slice(input, begin, end);
   }
@@ -47,6 +48,7 @@ public abstract class Token {
     return new int[] { row, col };
   }
 
+  /** How many code units the token covers. */
   public int size () {
     return end - begin;
   }

@@ -26,14 +26,17 @@ import java.util.List;
 public class Expression {
   public final List<Token> postfix;
 
+  /** An expression, kept in postfix order so evaluation is one pass. */
   public Expression (List<Token> tokens) {
     this.postfix = toPostfix(tokens);
   }
 
+  /** Evaluate the expression. */
   public Object evaluate (Context ctx) {
     return evaluate(ctx, false);
   }
 
+  /** Evaluate the expression, optionally letting an absent variable be null. */
   public Object evaluate (Context ctx, boolean lenient) {
     Assertions.assertTrue(ctx != null, "unable to evaluate: context not defined");
     List<Object> operands = new ArrayList<>();
@@ -59,6 +62,7 @@ public class Expression {
     return operands.isEmpty() ? Js.UNDEFINED : operands.get(0);
   }
 
+  /** Whether the expression holds anything to evaluate. */
   public boolean valid () {
     return !postfix.isEmpty();
   }
@@ -129,6 +133,7 @@ public class Expression {
     }
   }
 
+  /** The text a quoted token stands for. */
   public static Object evalQuotedToken (com.liquidjs.tokens.QuotedToken token) {
     return token.content;
   }

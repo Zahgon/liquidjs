@@ -45,14 +45,17 @@ public class Context {
   public Limiter memoryLimit;
   public Limiter renderLimit;
 
+  /** A context with no scope, the default options and no engine. */
   public Context () {
     this(null, LiquidOptions.defaults(), new RenderOptions(), null, null, null);
   }
 
+  /** A context over a scope, with options and the engine that renders it. */
   public Context (Object env, LiquidOptions opts, RenderOptions renderOptions, Liquid liquid) {
     this(env, opts, renderOptions, null, null, liquid);
   }
 
+  /** A context that shares its limits with the context that spawned it. */
   public Context (Object env, LiquidOptions opts, RenderOptions renderOptions, Limiter memoryLimit,
                   Limiter renderLimit, Liquid liquid) {
     this.scopes.add(Scope.createScope());
@@ -92,17 +95,20 @@ public class Context {
     return (T) value;
   }
 
+  /** Write a register. */
   public Object setRegister (String key, Object value) {
     registers.put(key, value);
     return value;
   }
 
+  /** Take a copy of several registers, to restore after rendering a partial. */
   public List<Object[]> saveRegister (String... keys) {
     List<Object[]> saved = new ArrayList<>();
     for (String key : keys) saved.add(new Object[] { key, getRegister(key) });
     return saved;
   }
 
+  /** Put saved registers back. */
   public void restoreRegister (List<Object[]> keyValues) {
     for (Object[] pair : keyValues) setRegister((String) pair[0], pair[1]);
   }
@@ -120,28 +126,34 @@ public class Context {
     if (source instanceof Map) target.putAll(Js.asObject(source));
   }
 
+  /** Read a path, starting from the innermost scope that defines its first segment. */
   public Object get (List<Object> paths) {
     Object scope = findScope(paths.isEmpty() ? null : paths.get(0));
     return getFromScope(scope, paths);
   }
 
+  /** Read a path and return its value. */
   public Object getSync (List<Object> paths) {
     return get(paths);
   }
 
+  /** Read a dotted path out of one value. */
   public Object getFromScope (Object scope, String path) {
     return getFromScope(scope, new ArrayList<>(com.liquidjs.js.JsString.split(path, ".")),
         strictVariables);
   }
 
+  /** Read a dotted path out of one value, raising on an absent segment when asked to. */
   public Object getFromScope (Object scope, String path, boolean strict) {
     return getFromScope(scope, new ArrayList<>(com.liquidjs.js.JsString.split(path, ".")), strict);
   }
 
+  /** Read a path out of one value. */
   public Object getFromScope (Object scope, List<Object> paths) {
     return getFromScope(scope, paths, strictVariables);
   }
 
+  /** Read a path out of one value, raising on an absent segment when asked to. */
   public Object getFromScope (Object input, List<Object> paths, boolean strict) {
     Object scope = input;
     for (int i = 0; i < paths.size(); i++) {
@@ -155,10 +167,12 @@ public class Context {
     return scope;
   }
 
+  /** Add a scope, which the next reads see first. */
   public void push (Object ctx) {
     scopes.add(ctx);
   }
 
+  /** Drop the innermost scope. */
   public Object pop () {
     return scopes.isEmpty() ? null : scopes.remove(scopes.size() - 1);
   }
@@ -168,10 +182,12 @@ public class Context {
     return (Map<String, Object>) scopes.get(0);
   }
 
+  /** A context with the same options and limits but a scope of its own. */
   public Context spawn () {
     return spawn(Scope.createScope());
   }
 
+  /** A context over another scope, with the same options and limits. */
   public Context spawn (Object scope) {
     RenderOptions options = new RenderOptions();
     options.sync = this.sync;
@@ -222,6 +238,7 @@ public class Context {
     return value;
   }
 
+  /** Read an own property of a value, as a property access does. */
   public static Object readJsProperty (Object obj, String key, boolean ownPropertyOnly) {
     if (obj instanceof Drop) return ((Drop) obj).getProperty(key);
     if (obj instanceof Map) {

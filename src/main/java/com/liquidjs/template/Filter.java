@@ -24,6 +24,7 @@ public class Filter {
   private final Liquid liquid;
   private final FilterToken token;
 
+  /** One filter of a chain, bound to the implementation registered under its name. */
   public Filter (FilterToken token, Object options, Liquid liquid) {
     this.token = token;
     this.name = token.name;
@@ -42,6 +43,7 @@ public class Filter {
     this.liquid = liquid;
   }
 
+  /** Apply the filter to a value, evaluating its arguments first. */
   public Object render (Object value, Context context) {
     List<Object> argv = new ArrayList<>();
     for (FilterArg arg : args) {

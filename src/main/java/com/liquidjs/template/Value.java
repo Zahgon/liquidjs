@@ -21,11 +21,13 @@ public class Value {
   public final List<Filter> filters = new ArrayList<>();
   public final Expression initial;
 
+  /** A value expression read from its source text. */
   public Value (String input, Liquid liquid) {
     this(new Tokenizer(input, liquid.options.operators, null, null,
         liquid.options.groupedExpressions).readFilteredValue(), liquid);
   }
 
+  /** A value expression already read into a token. */
   public Value (FilteredValueToken token, Liquid liquid) {
     this.initial = token.initial;
     for (FilterToken filterToken : token.filters) {
@@ -33,10 +35,12 @@ public class Value {
     }
   }
 
+  /** Evaluate the expression and apply its filters. */
   public Object value (Context ctx) {
     return value(ctx, false);
   }
 
+  /** Evaluate the expression, optionally letting an absent variable be null. */
   public Object value (Context ctx, boolean lenientIn) {
     boolean lenient = lenientIn || (ctx.opts.lenientIf && !filters.isEmpty()
         && "default".equals(filters.get(0).name));

@@ -36,6 +36,7 @@ public class LiquidDate {
 
   private final JsDate.Fields fields;
 
+  /** A date from a string, a timestamp or another date, displayed in a timezone. */
   public LiquidDate (Object init, String locale, Object timezone) {
     this.locale = locale;
     this.dateMillis = toMillis(init);
@@ -64,6 +65,7 @@ public class LiquidDate {
     return Double.NaN;
   }
 
+  /** The display timestamp in milliseconds, shifted into the display timezone. */
   public double getTime () {
     return displayMillis;
   }
@@ -76,79 +78,98 @@ public class LiquidDate {
     return dateMillis;
   }
 
+  /** The milliseconds of the display wall clock. */
   public int getMilliseconds () {
     return fields.millisecond;
   }
 
+  /** The seconds of the display wall clock. */
   public int getSeconds () {
     return fields.second;
   }
 
+  /** The minutes of the display wall clock. */
   public int getMinutes () {
     return fields.minute;
   }
 
+  /** The hours of the display wall clock. */
   public int getHours () {
     return fields.hour;
   }
 
+  /** The day of the week of the display wall clock, Sunday being zero. */
   public int getDay () {
     return fields.weekday;
   }
 
+  /** The day of the month of the display wall clock. */
   public int getDate () {
     return fields.day;
   }
 
+  /** The month of the display wall clock, January being zero. */
   public int getMonth () {
     return fields.month;
   }
 
+  /** The year of the display wall clock. */
   public int getFullYear () {
     return fields.year;
   }
 
+  /** The date and time as the locale writes them. */
   public String toLocaleString () {
     return JsDate.toLocaleString(fields);
   }
 
+  /** The time as the locale writes it. */
   public String toLocaleTimeString () {
     return JsDate.toLocaleTimeString(fields);
   }
 
+  /** The date as the locale writes it. */
   public String toLocaleDateString () {
     return JsDate.toLocaleDateString(fields);
   }
 
+  /** The display timezone offset in minutes west of UTC. */
   public int getTimezoneOffset () {
     return timezoneOffset;
   }
 
+  /** The name of the display timezone. */
   public String getTimeZoneName () {
     if (timezoneFixed) return timezoneName;
     return JsDate.localTimezoneName();
   }
 
+  /** The full name of the month. */
   public String getLongMonthName () {
     return JsDate.monthName(getMonth());
   }
 
+  /** The short name of the month. */
   public String getShortMonthName () {
     return JsDate.shortMonthName(getMonth());
   }
 
+  /** The full name of the weekday. */
   public String getLongWeekdayName () {
     return JsDate.weekdayName(getDay());
   }
 
+  /** The short name of the weekday. */
   public String getShortWeekdayName () {
     return JsDate.shortWeekdayName(getDay());
   }
 
+  /** The locale the names are written in. */
   public String getLocale () {
     return locale;
   }
 
+  /** Whether the date was read successfully. */
   public boolean valid () {
     return !Double.isNaN(getTime());
   }
