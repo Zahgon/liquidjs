@@ -265,7 +265,6 @@ public class Commander {
     List<String> out = new ArrayList<>();
     for (Option option : options) {
       if (option.longFlag != null) out.add(option.longFlag.substring(2));
-      if (option.negated) out.add(option.longFlag.substring(5));
     }
     out.add("help");
     return out;

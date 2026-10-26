@@ -59,6 +59,7 @@ public class LiquidDate {
 
   private static double toMillis (Object init) {
     if (Js.isNumber(init)) return (Double) init;
+    if (Js.isBoolean(init)) return Js.toNumberValue(init);
     if (Js.isString(init)) return JsDate.parse((String) init);
     if (init instanceof LiquidDate) return ((LiquidDate) init).dateValue();
     if (init instanceof java.util.Date) return ((java.util.Date) init).getTime();
